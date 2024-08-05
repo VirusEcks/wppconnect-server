@@ -134,6 +134,56 @@ export async function takeScreenshot(req: Request, res: Response) {
   }
 }
 
+
+export async function takeScreenshotOfContact(req: Request, res: Response) {
+  /**
+   #swagger.tags = ["Misc"]
+   #swagger.autoBody=false
+    #swagger.security = [{
+          "bearerAuth": []
+    }]
+    #swagger.parameters["session"] = {
+    schema: 'NERDWHATS_AMERICA'
+    }
+    #swagger.requestBody = {
+      required: true,
+      content: {
+        'application/json': {
+          schema: {
+            type: 'object',
+            properties: {
+              phone: { type: "string" },
+            },
+            required: ['phone'],
+          },
+          examples: {
+            'Default': {
+              value: {
+                phone: '5521999999999'
+              },
+            },
+          },
+        },
+      },
+    }
+  */
+
+  try {
+    const { phone } = req.body;
+
+    await req.client.openChat(message.chat.id);
+
+    const result = await req.client.takeScreenshot();
+    return res.status(200).json(result);
+  } catch (error: any) {
+    return res.status(500).json({
+      status: false,
+      message: 'Error on take screenshot',
+      error: error,
+    });
+  }
+}
+
 export async function clearSessionData(req: Request, res: Response) {
   /**
    #swagger.tags = ["Misc"]

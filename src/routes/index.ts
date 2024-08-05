@@ -857,6 +857,11 @@ routes.get(
   verifyToken,
   MiscController.takeScreenshot
 );
+routes.get(
+  '/api/:session/take-screenshot-contact',
+  verifyToken,
+  MiscController.takeScreenshotOfContact
+);
 routes.post('/api/:session/set-limit', MiscController.setLimit);
 
 //Communitys
